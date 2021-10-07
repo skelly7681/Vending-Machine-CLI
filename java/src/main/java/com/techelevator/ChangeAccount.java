@@ -7,6 +7,14 @@ public class ChangeAccount {
     private int dime;
     private int nickle;
 
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
     public String makeChange() {
         int quarters = 0;
         int dimes = 0;
