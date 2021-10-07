@@ -19,8 +19,8 @@ public class Log {
 
             String printToday = today.toString();
             String printTime = now.toString();
-            int printAmount = amount.toString();
-            int printBalance = balance.toString();
+//            int printAmount = amount.toString();
+//            int printBalance = balance.toString();
             String printTypesOfTransaction = typesOfTransaction.toString();
 
 
