@@ -2,8 +2,8 @@ package com.techelevator;
 
 public class ChipsProduct extends Product{
 
-    public ChipsProduct(String name, int price){
-        super(name,price);
+    public ChipsProduct(String slotLocation, String name, int price, String type){
+        super(slotLocation,name,price,type);
     }
 
     public String getSound(){

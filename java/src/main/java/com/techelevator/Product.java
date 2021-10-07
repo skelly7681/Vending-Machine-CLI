@@ -11,9 +11,11 @@ public abstract class Product {
 
     public abstract String getSound();
 
-    public Product(String name, int price) {
+    public Product(String slotLocation, String name, int price, String type) {
         this.name = name;
         this.price = price;
+        this.slotLocation = slotLocation;
+        this.type = type;
     }
 
     public String getSlotLocation() {
