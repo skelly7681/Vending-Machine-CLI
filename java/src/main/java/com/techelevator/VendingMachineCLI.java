@@ -35,6 +35,8 @@ public class VendingMachineCLI {
 
 		VendingMachine vm = new VendingMachine();
 
+		vm = new VendingMachine(new Stock().getInventory());
+
 		String[] activeMenu = MAIN_MENU_OPTIONS;
 
 		boolean run = true;
