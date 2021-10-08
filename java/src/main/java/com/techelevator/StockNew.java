@@ -2,9 +2,11 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
-public class Stock {
+public class StockNew {
 
     public static final int SLOT_LOCATION = 0;
     public static final int SLOT_NAME = 1;
@@ -25,7 +27,6 @@ public class Stock {
                 if (stockImporterArray[SLOT_LOCATION].contains("A")) {
                     Double cash = (Double.valueOf(stockImporterArray[SLOT_PRICE]) * 100);
                     ChipsProduct chipSlot = new ChipsProduct(stockImporterArray[SLOT_LOCATION], stockImporterArray[SLOT_NAME],Integer.parseInt(String.valueOf(cash)), stockImporterArray[SLOT_TYPE]);
-                    
                     vendingMachineInventory.put(stockImporterArray[SLOT_LOCATION], chipSlot);
                 }
 
