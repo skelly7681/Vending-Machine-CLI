@@ -31,6 +31,8 @@ public class VendingMachineCLI {
 
 	public void run() {
 
+		Stock newStock = new Stock();
+
 		VendingMachine vm = new VendingMachine();
 
 		String[] activeMenu = MAIN_MENU_OPTIONS;
@@ -43,6 +45,7 @@ public class VendingMachineCLI {
 			if (userChoice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
 //				vm.listItems();
+				vm.displayInventory();
 
 			} else if (userChoice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// display purchase menu / do purchase
