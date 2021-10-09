@@ -20,7 +20,7 @@ public class ChangeAccount {
     public void insertMoney(int amount) {
         if (amount == 1 || amount == 2 || amount == 5 || amount == 10) {
             this.balance += amount * 100;
-            System.out.println(amount + " dollars accepted your balance is " + this.balance/100 + " dollars");
+            System.out.println(amount + " dollars accepted your balance is " + balance/100 + " dollars");
         } else {
             System.out.println("Wrong form of tender");
 
@@ -43,6 +43,10 @@ public class ChangeAccount {
             balance -=5;
         }
         return "Your change is " + quarters + " quarters, " + dimes + " dimes, " + nickles + " nickles.";
+    }
+
+    public void decreaseBalance(int price){
+        balance -= price;
     }
 
 }

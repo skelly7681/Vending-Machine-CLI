@@ -35,7 +35,6 @@ public class VendingMachineCLI {
 
 	public void run() {
 
-		ChangeAccount newChangeAccount = new ChangeAccount();
 		VendingMachine vm = new VendingMachine();
 		vm = new VendingMachine(new Stock().getInventory());
 
@@ -68,13 +67,13 @@ public class VendingMachineCLI {
 			} else if (userChoice.equals(PURCHASE_MENU_OPTION_DEPOSIT_MONEY)) {
 				String deposit = (String) menu.getChoiceFromOptions(DEPOSIT_MENU_OPTIONS);
 				if (deposit.equals(DEPOSIT_MENU_OPTION_ONE)) {
-					newChangeAccount.insertMoney(1);
+					vm.feedMoney(1);
 				} else if (deposit.equals(DEPOSIT_MENU_OPTION_TWO)) {
-					newChangeAccount.insertMoney(2);
+					vm.feedMoney(2);
 				} else if (deposit.equals(DEPOSIT_MENU_OPTION_FIVE)) {
-					newChangeAccount.insertMoney(5);
+					vm.feedMoney(5);
 				} else if (deposit.equals(DEPOSIT_MENU_OPTION_TEN)) {
-					newChangeAccount.insertMoney(10);
+					vm.feedMoney(10);
 				}
 			}
 		}

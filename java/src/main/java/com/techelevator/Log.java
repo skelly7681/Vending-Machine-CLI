@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 
 
 public class Log {
-    public void log( String typesOfTransaction, int amount, int balance){
+    public void log( String typesOfTransaction, int amount, ){
 
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
