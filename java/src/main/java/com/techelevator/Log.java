@@ -9,8 +9,8 @@ import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
 
-public class Log {
-    public void log( String typesOfTransaction, int amount, ){
+public class Log{
+    public void writer ( String typesOfTransaction, int amount){
 
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
@@ -20,11 +20,8 @@ public class Log {
             String printToday = today.toString();
             String printTime = now.toString();
 //            int printAmount = amount.toString();
-//            int printBalance = balance.toString();
+           // int printBalance = vmChangeAccount.balance;
             String printTypesOfTransaction = typesOfTransaction.toString();
-
-
-
 
         } catch (FileNotFoundException fileNotFoundException) {
             fileNotFoundException.printStackTrace();

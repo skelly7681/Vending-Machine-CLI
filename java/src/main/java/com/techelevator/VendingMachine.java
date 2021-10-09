@@ -17,6 +17,7 @@ public class VendingMachine {
     };
     List<Product> chipSlotList = new ArrayList<>();
     Map<String, List<Product>> vendingMachineInventory = new TreeMap<>();
+    Log writer = new Log();
 
 
     public VendingMachine(Map<String, List<Product>> vendingMachineInventory) {
@@ -69,32 +70,29 @@ public class VendingMachine {
 
     public void feedMoney(int value) {
         vmChangeAccount.insertMoney(value);
+        String typeOfTransaction = "Feed Money";
+        if(value == 1) {
+            writer.writer(typeOfTransaction, vmChangeAccount.balance);
+        }
     }
 
+    public void writer ( String typesOfTransaction, int amount, int balance){
 
-    public void log( String typesOfTransaction, int amount, ){
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
 
-            LocalDate today = LocalDate.now();
-            LocalTime now = LocalTime.now();
+        try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(new File("log.txt"),true))){
 
-            try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(new File("log.txt"),true))){
+            String printToday = today.toString();
+            String printTime = now.toString();
+            int printAmount = amount;
+             int printBalance = vmChangeAccount.balance;
+            String printTypesOfTransaction = typesOfTransaction.toString();
+            System.out.println(printToday);
 
-                String printToday = today.toString();
-                String printTime = now.toString();
-//            int printAmount = amount.toString();
-//            int printBalance = balance.toString();
-                String printTypesOfTransaction = typesOfTransaction.toString();
-
-
-
-
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
         }
-
-
 
     }
 

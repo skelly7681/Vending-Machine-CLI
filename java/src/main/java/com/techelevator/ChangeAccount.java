@@ -5,7 +5,8 @@ public class ChangeAccount {
     public int balance;
     private int quarter;
     private int dime;
-    private int nickle;
+    private int nicklel;
+
 
     public ChangeAccount(){};
 
@@ -18,6 +19,7 @@ public class ChangeAccount {
     }
 
     public void insertMoney(int amount) {
+        String typeofTransaction = "Feed Money";
         if (amount == 1 || amount == 2 || amount == 5 || amount == 10) {
             this.balance += amount * 100;
             System.out.println(amount + " dollars accepted your balance is " + balance/100 + " dollars");
