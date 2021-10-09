@@ -21,7 +21,7 @@ public class Stock {
                 String line = stockImporter.nextLine();
 
                 String[] stockImporterArray = line.split("\\|");
-              //TODO: Consider re-factor
+                //TODO: Consider re-factor
                 if (stockImporterArray[SLOT_LOCATION].contains("A")) {
                     Double cash = (Double.valueOf(stockImporterArray[SLOT_PRICE]) * 100);
                     ChipsProduct chipSlot = new ChipsProduct(stockImporterArray[SLOT_LOCATION], stockImporterArray[SLOT_NAME], cash.intValue(), stockImporterArray[SLOT_TYPE]);

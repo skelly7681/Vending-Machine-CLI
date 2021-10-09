@@ -2,10 +2,12 @@ package com.techelevator;
 
 public class ChangeAccount {
 
-    private int balance;  //multiply input by 100 - dont need to convert back to dollars since change doesn't include dollars
+    public int balance;
     private int quarter;
     private int dime;
     private int nickle;
+
+    public ChangeAccount(){};
 
     public int getBalance() {
         return balance;
@@ -13,6 +15,16 @@ public class ChangeAccount {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public void insertMoney(int amount) {
+        if (amount == 1 || amount == 2 || amount == 5 || amount == 10) {
+            this.balance += amount * 100;
+            System.out.println(amount + " dollars accepted your balance is " + this.balance/100 + " dollars");
+        } else {
+            System.out.println("Wrong form of tender");
+
+        }
     }
 
     public String makeChange() {

@@ -2,10 +2,10 @@ package com.techelevator;
 
 public abstract class Product {
 
-    private String name;
-    private int price;
-    private String slotLocation;
-    private String type;
+    public String name;
+    public int price;
+    public String slotLocation;
+    public String type;
     //count (can be put into inventory class)
     //abstract method for getsound to make sure children ints
 
