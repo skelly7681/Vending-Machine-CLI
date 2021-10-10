@@ -20,7 +20,7 @@ public class Log{
             String printToday = today.toString();
             String printTime = now.toString();
 //            int printAmount = amount.toString();
-           // int printBalance = vmChangeAccount.balance;
+//            int printBalance = vmChangeAccount.balance;
             String printTypesOfTransaction = typesOfTransaction.toString();
 
         } catch (FileNotFoundException fileNotFoundException) {

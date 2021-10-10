@@ -1,11 +1,10 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,57 +41,87 @@ public class VendingMachine {
                 System.out.println("Sold Out!");
             } else {
 
-                System.out.println(key + " " + value.get(0).getName() + " " + value.get(0).getPrice() + " " + value.size());
+                System.out.println(key + " " + value.get(0).getName() + " " + Double.valueOf(value.get(0).getPrice())/100 + " " + value.size());
             }
         }
     }
 
 
     public void purchase(String chosenProduct) {
-
-
         //checks inventory for userinput which equals chosenProduct
-        if (vendingMachineInventory.containsKey(chosenProduct)) {
-            if (vendingMachineInventory.get(chosenProduct).size() < 1) {
-                System.out.println("Sorry out of stock");
-            }
+        try {
 
-            if (vendingMachineInventory.get(chosenProduct).size() >= 1) {
-                if (vmChangeAccount.getBalance() >= (vendingMachineInventory.get(chosenProduct).get(0).price)) {
-                    vmChangeAccount.decreaseBalance(vendingMachineInventory.get(chosenProduct).get(0).price);
-                } else {
-                    System.out.println("Not enough money");
+            if (vendingMachineInventory.containsKey(chosenProduct)) {
+                if (vendingMachineInventory.get(chosenProduct).size() < 1) {
+                    System.out.println("Sorry out of stock");
+                }
+
+                if (vendingMachineInventory.get(chosenProduct).size() >= 1) {
+                    if (vmChangeAccount.getBalance() >= (vendingMachineInventory.get(chosenProduct).get(0).price)) {
+                        System.out.println("The cost is " + Double.valueOf(vendingMachineInventory.get(chosenProduct).get(0).price) / 100 + " dollars");
+                        System.out.println("The item you have chosen is " + vendingMachineInventory.get(chosenProduct).get(0).getName());
+                        System.out.println(vendingMachineInventory.get(chosenProduct).get(0).getSound());
+                        vmChangeAccount.decreaseBalance(vendingMachineInventory.get(chosenProduct).get(0).price);
+                        Product removed = vendingMachineInventory.get(chosenProduct).remove(0);
+                    } else {
+                        System.out.println("Not enough money");
+                    }
                 }
             }
+            System.out.println("Your balance is " + Double.valueOf(vmChangeAccount.getBalance()) / 100);
+        } catch (Exception e){
+            System.out.println("Invalid Input, Choose Again.");
         }
-        System.out.println("Your balance is " + vmChangeAccount.getBalance());
     }
 
     public void feedMoney(int value) {
         vmChangeAccount.insertMoney(value);
         String typeOfTransaction = "Feed Money";
         if(value == 1) {
-            writer.writer(typeOfTransaction, vmChangeAccount.balance);
+            audit(vmChangeAccount.balance, vmChangeAccount.balance, typeOfTransaction);
         }
     }
 
-    public void writer ( String typesOfTransaction, int amount, int balance){
+    public void finishTransaction(){
 
-        LocalDate today = LocalDate.now();
-        LocalTime now = LocalTime.now();
+        vmChangeAccount.makeChange(vmChangeAccount.balance);
 
-        try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(new File("log.txt"),true))){
+    }
 
-            String printToday = today.toString();
-            String printTime = now.toString();
-            int printAmount = amount;
-             int printBalance = vmChangeAccount.balance;
-            String printTypesOfTransaction = typesOfTransaction.toString();
-            System.out.println(printToday);
 
-        } catch (FileNotFoundException fileNotFoundException) {
-            fileNotFoundException.printStackTrace();
+
+
+//    public void writer ( String typesOfTransaction, int amount, int balance){
+//
+//        LocalDate today = LocalDate.now();
+//        LocalTime now = LocalTime.now();
+//
+//        try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(new File("log.txt"),true))){
+//
+//            String printToday = today.toString();
+//            String printTime = now.toString();
+//            int printAmount = amount;
+//             int printBalance = vmChangeAccount.balance;
+//            String printTypesOfTransaction = typesOfTransaction.toString();
+//            System.out.printf(printToday + printTime + printAmount + printBalance);
+//
+//        } catch (FileNotFoundException fileNotFoundException) {
+//            fileNotFoundException.printStackTrace();
+//        }
+
+    public void audit(double originalBalance, double updatedBalance, String type) {
+        DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        String dateAndTime = dateTime.format(LocalDateTime.now());
+        File auditLog = new File("src/main/resources/log.txt");
+        try(FileWriter writer = new FileWriter(auditLog, true)) {
+            if(!auditLog.exists()) {
+                auditLog.createNewFile();
+            }
+            writer.write(dateAndTime + " " + type + " $" + originalBalance + " $" + updatedBalance + "\n");
+        } catch(IOException e) {
+            System.err.println("Audit Log not created");
         }
+
 
     }
 

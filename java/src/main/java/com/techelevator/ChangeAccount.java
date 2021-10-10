@@ -29,7 +29,7 @@ public class ChangeAccount {
         }
     }
 
-    public String makeChange() {
+    public void makeChange(int balance) {
         int quarters = 0;
         int dimes = 0;
         int nickles = 0;
@@ -44,7 +44,7 @@ public class ChangeAccount {
             nickles++;
             balance -=5;
         }
-        return "Your change is " + quarters + " quarters, " + dimes + " dimes, " + nickles + " nickles.";
+        System.out.println("Your change is " + quarters + " quarters, " + dimes + " dimes, " + nickles + " nickles.");
     }
 
     public void decreaseBalance(int price){

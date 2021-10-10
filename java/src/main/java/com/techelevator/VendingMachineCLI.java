@@ -49,7 +49,10 @@ public class VendingMachineCLI {
 //				vm.listItems();
 				vm.displayInventory();
 
-			} else if (userChoice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+			}else if(userChoice.equals(PURCHASE_MENU_OPTION_END_TRANSACTION)){
+				vm.finishTransaction();
+			}
+			else if (userChoice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// display purchase menu / do purchase
 				activeMenu = PURCHASE_MENU_OPTIONS;
 			} else if(userChoice.equals(PURCHASE_MENU_OPTION_PURCHASE)){
