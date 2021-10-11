@@ -12,9 +12,7 @@ import java.util.TreeMap;
 
 public class VendingMachine {
 
-    ChangeAccount vmChangeAccount = new ChangeAccount() {
-    };
-    List<Product> chipSlotList = new ArrayList<>();
+    ChangeAccount vmChangeAccount = new ChangeAccount() {};
     Map<String, List<Product>> vendingMachineInventory = new TreeMap<>();
     Log writer = new Log();
 
@@ -31,16 +29,9 @@ public class VendingMachine {
         for (Map.Entry<String, List<Product>> entry : vendingMachineInventory.entrySet()) {
             String key = entry.getKey();
             List<Product> value = entry.getValue();
-            if (value.size() == 1) {
-                System.out.println(key + " Product Out of stock");
-            } else {
-                //TODO //why is this printing memory reference
-            }
             if (value.size() == 0) {
-
-                System.out.println("Sold Out!");
+                System.out.println(key + " Product is SOLD OUT!!");
             } else {
-
                 System.out.println(key + " " + value.get(0).getName() + " " + Double.valueOf(value.get(0).getPrice())/100 + " " + value.size());
             }
         }
@@ -63,6 +54,9 @@ public class VendingMachine {
                         System.out.println(vendingMachineInventory.get(chosenProduct).get(0).getSound());
                         vmChangeAccount.decreaseBalance(vendingMachineInventory.get(chosenProduct).get(0).price);
                         Product removed = vendingMachineInventory.get(chosenProduct).remove(0);
+                        String name = vendingMachineInventory.get(chosenProduct).get(0).getName() + " " + chosenProduct;
+                        int cost = vendingMachineInventory.get(chosenProduct).get(0).price/100;
+                        writer.writer(name, cost, vmChangeAccount.balance);
                     } else {
                         System.out.println("Not enough money");
                     }
@@ -76,15 +70,15 @@ public class VendingMachine {
 
     public void feedMoney(int value) {
         vmChangeAccount.insertMoney(value);
-        String typeOfTransaction = "Feed Money";
         if(value == 1) {
-            audit(vmChangeAccount.balance, vmChangeAccount.balance, typeOfTransaction);
+            writer.writer("FEED MONEY", value, vmChangeAccount.balance);
         }
     }
 
     public void finishTransaction(){
 
         vmChangeAccount.makeChange(vmChangeAccount.balance);
+        writer.writer("GIVE CHANGE", vmChangeAccount.balance/100, 0);
 
     }
 
@@ -109,20 +103,20 @@ public class VendingMachine {
 //            fileNotFoundException.printStackTrace();
 //        }
 
-    public void audit(double originalBalance, double updatedBalance, String type) {
-        DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        String dateAndTime = dateTime.format(LocalDateTime.now());
-        File auditLog = new File("src/main/resources/log.txt");
-        try(FileWriter writer = new FileWriter(auditLog, true)) {
-            if(!auditLog.exists()) {
-                auditLog.createNewFile();
-            }
-            writer.write(dateAndTime + " " + type + " $" + originalBalance + " $" + updatedBalance + "\n");
-        } catch(IOException e) {
-            System.err.println("Audit Log not created");
-        }
-
-
-    }
+//    public void audit(double originalBalance, double updatedBalance, String type) {
+//        DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+//        String dateAndTime = dateTime.format(LocalDateTime.now());
+//        File auditLog = new File("src/main/resources/log.txt");
+//        try(FileWriter writer = new FileWriter(auditLog, true)) {
+//            if(!auditLog.exists()) {
+//                auditLog.createNewFile();
+//            }
+//            writer.write(dateAndTime + " " + type + " $" + originalBalance + " $" + updatedBalance + "\n");
+//        } catch(IOException e) {
+//            System.err.println("Audit Log not created");
+//        }
+//
+//
+//    }
 
 }

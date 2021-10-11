@@ -7,6 +7,8 @@ public class ChangeAccount {
     private int dime;
     private int nicklel;
 
+    Log writer = new Log();
+
 
     public ChangeAccount(){};
 
@@ -19,10 +21,10 @@ public class ChangeAccount {
     }
 
     public void insertMoney(int amount) {
-        String typeofTransaction = "Feed Money";
         if (amount == 1 || amount == 2 || amount == 5 || amount == 10) {
             this.balance += amount * 100;
             System.out.println(amount + " dollars accepted your balance is " + balance/100 + " dollars");
+            writer.writer("FEED MONEY", amount, balance);
         } else {
             System.out.println("Wrong form of tender");
 

@@ -13,7 +13,7 @@ public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
 	//PURCHASE OPTIONS
 	private static final String PURCHASE_MENU_OPTION_DEPOSIT_MONEY = "Feed Money";
-	private static final String PURCHASE_MENU_OPTION_PURCHASE = "Purchases";
+	private static final String PURCHASE_MENU_OPTION_PURCHASE = "Select Product";
 	private static final String PURCHASE_MENU_OPTION_END_TRANSACTION = "End Transaction";
 	private static final String PURCHASE_MENU_OPTION_RETURN_TO_MAIN = "Main Menu";
 	//DEPOSIT_OPTIONS
