@@ -13,26 +13,26 @@ import java.util.Date;
 
 
 public class Log{
-    public void writer ( String typesOfTransaction, int amount, int balance){
+    public void writer ( String typesOfTransaction, double amount, double balance){
 
         LocalTime now = LocalTime.now();
-        Format f = new SimpleDateFormat("MM/dd/yy");
+        Format f = new SimpleDateFormat("MM/dd/yy hh:mm:ss");
+
 
         try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(new File("log.txt"),true))){
 
 
             String strDate = f.format(new Date());
-            String strTime = now.toString();
-            String srtAmount = String.valueOf(amount);
-            String srtBalance = String.valueOf(balance/100);
+            double newBalance = balance/100;
             String srtTypesOfTransaction = typesOfTransaction.toString();
 
-            logWriter.print("> " + strDate + " " + strTime + " " + srtTypesOfTransaction
-                    + " $" + srtAmount + " " + " $" + srtBalance + " ");
+            logWriter.println("> " + strDate + " " + " " + srtTypesOfTransaction
+                    + " $" + String.format("%.2f", amount) + " " + " $" + String.format("%.2f", newBalance) + " ");
 
         } catch (FileNotFoundException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
         }
 
     }
+
 }
